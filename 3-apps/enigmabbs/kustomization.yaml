@@ -1,4 +1,4 @@
-namespace: media
+namespace: enigmabbs
 
 resources:
   - namespace.yaml
