@@ -6,7 +6,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
@@ -20,7 +20,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
@@ -34,7 +34,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
@@ -48,7 +48,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
@@ -62,7 +62,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
@@ -76,7 +76,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
@@ -90,7 +90,7 @@ metadata:
 spec:
   storageClassName: "topolvm-provisioner"
   accessModes:
-    - ReadWriteMany             # < Multiple pods can write to storage. Same value as pv
+    - ReadWriteOnce             # < Multiple pods can write to storage. Same value as pv
   volumeMode: Filesystem
   resources:
     requests:
