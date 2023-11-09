@@ -45,7 +45,7 @@ spec:
           claimName: enigmabbs-mail  # < pvc name we created in the previous yaml
       containers:
       - env: []                    # < environment variables. See https://hub.docker.com/r/linuxserver/plex 
-        image: enigmabbs/enigma-bbs@sha256:2064fb203634e6bb0dc1eb17104bf6e064d09250df258855b4f78beb6b3ec4af   # < the name of the docker image we will use
+        image: docker.io/milleniumbug/enigma-bbs-arm:latest # image we will use
         imagePullPolicy: Always    # < always use the latest image when creating container/pod
         name: enigmabbs           # < name of container
         ports:
