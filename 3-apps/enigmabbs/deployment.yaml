@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: enigmabbs               # < label for tagging and reference
+  name: enigmabbs                # < name of the deployment
+  namespace: media           # < namespace where to place the deployment and pods               # < namespace where place the deployment and pods
+spec:
+  replicas: 1                     # < number of pods to deploy
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: enigmabbs
+  strategy:
+    rollingUpdate:
+      maxSurge: 0                 # < The number of pods that can be created above the desired amount of pods during an update
+      maxUnavailable: 1           # < The number of pods that can be unavailable during the update process
+    type: RollingUpdate           # < New pods are added gradually, and old pods are terminated gradually
+  template:
+    metadata:
+      labels:
+        app: enigmabbs
+    spec:
+      volumes:
+      - name: enigmabbs-config     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-config  # < pvc name we created in the previous yaml
+      - name: enigmabbs-db     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-db  # < pvc name we created in the previous yaml
+      - name: enigmabbs-logs     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-logs  # < pvc name we created in the previous yaml
+      - name: enigmabbs-filebase     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-filebase  # < pvc name we created in the previous yaml
+      - name: enigmabbs-art     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-art  # < pvc name we created in the previous yaml
+      - name: enigmabbs-mods     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-mods  # < pvc name we created in the previous yaml
+      - name: enigmabbs-mail     # < linkname of the volume for the pvc
+        persistentVolumeClaim:
+          claimName: enigmabbs-mail  # < pvc name we created in the previous yaml
+      containers:
+      - env: []                    # < environment variables. See https://hub.docker.com/r/linuxserver/plex 
+        image: enigmabbs/enigma-bbs:latest   # < the name of the docker image we will use
+        imagePullPolicy: Always    # < always use the latest image when creating container/pod
+        name: enigmabbs           # < name of container
+        ports:
+        - containerPort: 8888
+          name: telnet
+          protocol: TCP
+        - containerPort: 8889
+          name: ssh
+          protocol: TCP
+        resources: {}
+        stdin: true
+        tty: true
+        volumeMounts:            # < the volume mount in the container. Look at the relation volumelabel->pvc->pv
+        - mountPath: /enigma-bbs/art     # < mount location in the container
+          name: enigmabbs-art  # < volumelabel configured earlier in the yaml file
+        - mountPath: /enigma-bbs/logs	
+          name: enigmabbs-logs 
+        - mountPath: /enigma-bbs/config     # < mount location in the container
+          name: enigmabbs-config  # < volumelabel configured earlier in the yaml file
+        - mountPath: /enigma-bbs/db
+          name: enigmabbs-db 
+        - mountPath: /enigma-bbs/filebase	     # < mount location in the container
+          name: enigmabbs-filebase  # < volumelabel configured earlier in the yaml file
+        - mountPath: /enigma-bbs/mods	
+          name: enigmabbs-mods 
+        - mountPath: /mail	     # < mount location in the container
+          name: enigmabbs-mail  # < volumelabel configured earlier in the yaml file
+      restartPolicy: Always
